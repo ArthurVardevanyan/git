@@ -1,8 +1,8 @@
-resource "github_repository" "strava" {
+resource "github_repository" "bmc" {
   # checkov:skip=CKV_GIT_1: I want the Repo to be public
-  name                                    = "Strava"
+  name                                    = "bmc-sim"
   homepage_url                            = ""
-  description                             = "Strava API Helper Commands"
+  description                             = "bmc shim"
   visibility                              = "public"
   has_issues                              = true
   has_discussions                         = false
@@ -22,13 +22,13 @@ resource "github_repository" "strava" {
   has_downloads                           = false
   auto_init                               = true
   license_template                        = "unlicense"
-  archived                                = true # false
+  archived                                = false
   archive_on_destroy                      = true
   allow_update_branch                     = true
-  vulnerability_alerts                    = false # true
+  vulnerability_alerts                    = true
   ignore_vulnerability_alerts_during_read = false
   topics = [
-    "strava",
+    "bmc",
   ]
 
   security_and_analysis {
@@ -36,32 +36,32 @@ resource "github_repository" "strava" {
       status = "enabled"
     }
     secret_scanning_push_protection {
-      status = "disabled" # enabled
+      status = "enabled"
     }
   }
 
 }
 
-resource "github_repository_dependabot_security_updates" "strava" {
-  repository = github_repository.strava.id
+resource "github_repository_dependabot_security_updates" "bmc" {
+  repository = github_repository.bmc.id
   enabled    = true
 }
 
-resource "github_branch" "strava_main" {
-  repository = github_repository.strava.name
+resource "github_branch" "bmc_main" {
+  repository = github_repository.bmc.name
   branch     = "main"
 }
 
-resource "github_branch_default" "strava" {
-  repository = github_repository.strava.name
-  branch     = github_branch.strava_main.branch
+resource "github_branch_default" "bmc" {
+  repository = github_repository.bmc.name
+  branch     = github_branch.bmc_main.branch
 
 }
 
-resource "github_branch_protection" "strava_main" {
+resource "github_branch_protection" "bmc_main" {
   # checkov:skip=CKV_GIT_5:I am a single user
-  repository_id                   = github_repository.strava.node_id
-  pattern                         = github_branch.strava_main.branch
+  repository_id                   = github_repository.bmc.node_id
+  pattern                         = github_branch.bmc_main.branch
   enforce_admins                  = false
   require_signed_commits          = true
   required_linear_history         = true
