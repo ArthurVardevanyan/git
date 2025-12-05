@@ -1,6 +1,6 @@
 resource "github_repository" "bmc" {
   # checkov:skip=CKV_GIT_1: I want the Repo to be public
-  name                                    = "bmc-sim"
+  name                                    = "bmc-shim"
   homepage_url                            = ""
   description                             = "bmc shim"
   visibility                              = "public"
