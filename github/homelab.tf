@@ -9,12 +9,12 @@ resource "github_repository" "HomeLab" {
   has_projects                            = false
   has_wiki                                = false
   is_template                             = false
-  allow_merge_commit                      = true
-  allow_squash_merge                      = true
+  allow_merge_commit                      = false
+  allow_squash_merge                      = false
   allow_rebase_merge                      = true
   allow_auto_merge                        = false
-  squash_merge_commit_title               = "COMMIT_OR_PR_TITLE"
-  squash_merge_commit_message             = "COMMIT_MESSAGES"
+  squash_merge_commit_title               = "PR_TITLE"
+  squash_merge_commit_message             = "BLANK"
   merge_commit_title                      = "MERGE_MESSAGE"
   merge_commit_message                    = "PR_TITLE"
   delete_branch_on_merge                  = true
@@ -84,7 +84,7 @@ resource "github_branch_protection" "homelab_main" {
     dismissal_restrictions          = []
     pull_request_bypassers          = []
     require_code_owner_reviews      = false
-    required_approving_review_count = 1
+    required_approving_review_count = 0
     require_last_push_approval      = false
   }
 

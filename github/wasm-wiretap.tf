@@ -1,8 +1,8 @@
-resource "github_repository" "ArthurVardevanyan" {
+resource "github_repository" "wasm" {
   # checkov:skip=CKV_GIT_1: I want the Repo to be public
-  name                                    = "ArthurVardevanyan"
+  name                                    = "wasm-wiretap"
   homepage_url                            = ""
-  description                             = ""
+  description                             = "wasm wiretap, collect request/response header/body"
   visibility                              = "public"
   has_issues                              = true
   has_discussions                         = false
@@ -21,13 +21,15 @@ resource "github_repository" "ArthurVardevanyan" {
   web_commit_signoff_required             = true
   has_downloads                           = false
   auto_init                               = true
-  license_template                        = "unlicense"
+  license_template                        = "apache-2.0"
   archived                                = false
   archive_on_destroy                      = true
   allow_update_branch                     = true
   vulnerability_alerts                    = true
   ignore_vulnerability_alerts_during_read = false
-  topics                                  = []
+  topics = [
+    "wasm",
+  ]
 
   security_and_analysis {
     secret_scanning {
@@ -40,26 +42,26 @@ resource "github_repository" "ArthurVardevanyan" {
 
 }
 
-resource "github_repository_dependabot_security_updates" "ArthurVardevanyan" {
-  repository = github_repository.ArthurVardevanyan.id
+resource "github_repository_dependabot_security_updates" "wasm" {
+  repository = github_repository.wasm.id
   enabled    = true
 }
 
-resource "github_branch" "ArthurVardevanyan_main" {
-  repository = github_repository.ArthurVardevanyan.name
+resource "github_branch" "wasm_main" {
+  repository = github_repository.wasm.name
   branch     = "main"
 }
 
-resource "github_branch_default" "ArthurVardevanyan" {
-  repository = github_repository.ArthurVardevanyan.name
-  branch     = github_branch.ArthurVardevanyan_main.branch
+resource "github_branch_default" "wasm" {
+  repository = github_repository.wasm.name
+  branch     = github_branch.wasm_main.branch
 
 }
 
-resource "github_branch_protection" "ArthurVardevanyan_main" {
+resource "github_branch_protection" "wasm_main" {
   # checkov:skip=CKV_GIT_5:I am a single user
-  repository_id                   = github_repository.ArthurVardevanyan.node_id
-  pattern                         = github_branch.ArthurVardevanyan_main.branch
+  repository_id                   = github_repository.wasm.node_id
+  pattern                         = github_branch.wasm_main.branch
   enforce_admins                  = false
   require_signed_commits          = true
   required_linear_history         = true

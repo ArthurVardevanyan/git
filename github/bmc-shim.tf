@@ -9,11 +9,11 @@ resource "github_repository" "bmc" {
   has_projects                            = false
   has_wiki                                = false
   is_template                             = false
-  allow_merge_commit                      = true
+  allow_merge_commit                      = false
   allow_squash_merge                      = true
-  allow_rebase_merge                      = true
+  allow_rebase_merge                      = false
   allow_auto_merge                        = false
-  squash_merge_commit_title               = "COMMIT_OR_PR_TITLE"
+  squash_merge_commit_title               = "PR_TITLE"
   squash_merge_commit_message             = "COMMIT_MESSAGES"
   merge_commit_title                      = "MERGE_MESSAGE"
   merge_commit_message                    = "PR_TITLE"
@@ -81,7 +81,7 @@ resource "github_branch_protection" "bmc_main" {
     dismissal_restrictions          = []
     pull_request_bypassers          = []
     require_code_owner_reviews      = false
-    required_approving_review_count = 1
+    required_approving_review_count = 0
     require_last_push_approval      = false
   }
 

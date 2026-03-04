@@ -9,12 +9,12 @@ resource "github_repository" "strava" {
   has_projects                            = false
   has_wiki                                = false
   is_template                             = false
-  allow_merge_commit                      = true
-  allow_squash_merge                      = true
+  allow_merge_commit                      = false
+  allow_squash_merge                      = false
   allow_rebase_merge                      = true
   allow_auto_merge                        = false
-  squash_merge_commit_title               = "COMMIT_OR_PR_TITLE"
-  squash_merge_commit_message             = "COMMIT_MESSAGES"
+  squash_merge_commit_title               = "PR_TITLE"
+  squash_merge_commit_message             = "BLANK"
   merge_commit_title                      = "MERGE_MESSAGE"
   merge_commit_message                    = "PR_TITLE"
   delete_branch_on_merge                  = true
@@ -44,7 +44,7 @@ resource "github_repository" "strava" {
 
 resource "github_repository_dependabot_security_updates" "strava" {
   repository = github_repository.strava.id
-  enabled    = true
+  enabled    = false # true
 }
 
 resource "github_branch" "strava_main" {
@@ -58,31 +58,31 @@ resource "github_branch_default" "strava" {
 
 }
 
-resource "github_branch_protection" "strava_main" {
-  # checkov:skip=CKV_GIT_5:I am a single user
-  repository_id                   = github_repository.strava.node_id
-  pattern                         = github_branch.strava_main.branch
-  enforce_admins                  = false
-  require_signed_commits          = true
-  required_linear_history         = true
-  require_conversation_resolution = true
-  force_push_bypassers = [
-    "/ArthurVardevanyan"
-  ]
-  allows_deletions    = false
-  allows_force_pushes = false
-  lock_branch         = false
-  required_status_checks {
-    strict = true
-  }
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = false
-    restrict_dismissals             = false
-    dismissal_restrictions          = []
-    pull_request_bypassers          = []
-    require_code_owner_reviews      = false
-    required_approving_review_count = 1
-    require_last_push_approval      = false
-  }
+# resource "github_branch_protection" "strava_main" {
+#   # checkov:skip=CKV_GIT_5:I am a single user
+#   repository_id                   = github_repository.strava.node_id
+#   pattern                         = github_branch.strava_main.branch
+#   enforce_admins                  = false
+#   require_signed_commits          = true
+#   required_linear_history         = true
+#   require_conversation_resolution = true
+#   force_push_bypassers = [
+#     "/ArthurVardevanyan"
+#   ]
+#   allows_deletions    = false
+#   allows_force_pushes = false
+#   lock_branch         = false
+#   required_status_checks {
+#     strict = true
+#   }
+#   required_pull_request_reviews {
+#     dismiss_stale_reviews           = false
+#     restrict_dismissals             = false
+#     dismissal_restrictions          = []
+#     pull_request_bypassers          = []
+#     require_code_owner_reviews      = false
+#     required_approving_review_count = 0
+#     require_last_push_approval      = false
+#   }
 
-}
+# }
