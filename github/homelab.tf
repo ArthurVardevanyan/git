@@ -10,8 +10,8 @@ resource "github_repository" "HomeLab" {
   has_wiki                                = false
   is_template                             = false
   allow_merge_commit                      = false
-  allow_squash_merge                      = false
-  allow_rebase_merge                      = true
+  allow_squash_merge                      = true
+  allow_rebase_merge                      = false
   allow_auto_merge                        = false
   squash_merge_commit_title               = "PR_TITLE"
   squash_merge_commit_message             = "BLANK"
