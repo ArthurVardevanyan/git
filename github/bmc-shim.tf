@@ -44,7 +44,7 @@ resource "github_repository" "bmc" {
 
 resource "github_repository_dependabot_security_updates" "bmc" {
   repository = github_repository.bmc.id
-  enabled    = true
+  enabled    = false
 }
 
 resource "github_branch" "bmc_main" {

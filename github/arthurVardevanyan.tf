@@ -42,7 +42,7 @@ resource "github_repository" "ArthurVardevanyan" {
 
 resource "github_repository_dependabot_security_updates" "ArthurVardevanyan" {
   repository = github_repository.ArthurVardevanyan.id
-  enabled    = true
+  enabled    = false
 }
 
 resource "github_branch" "ArthurVardevanyan_main" {

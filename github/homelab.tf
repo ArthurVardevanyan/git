@@ -47,7 +47,7 @@ resource "github_repository" "HomeLab" {
 
 resource "github_repository_dependabot_security_updates" "HomeLab" {
   repository = github_repository.HomeLab.id
-  enabled    = true
+  enabled    = false
 }
 
 resource "github_branch" "homelab_main" {

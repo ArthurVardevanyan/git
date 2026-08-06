@@ -40,7 +40,7 @@ resource "github_repository" "git" {
 
 resource "github_repository_dependabot_security_updates" "git" {
   repository = github_repository.git.id
-  enabled    = true
+  enabled    = false
 }
 
 resource "github_branch" "git_main" {

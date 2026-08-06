@@ -44,7 +44,7 @@ resource "github_repository" "wasm" {
 
 resource "github_repository_dependabot_security_updates" "wasm" {
   repository = github_repository.wasm.id
-  enabled    = true
+  enabled    = false
 }
 
 resource "github_branch" "wasm_main" {
