@@ -1,32 +1,29 @@
 resource "github_repository" "HomeLab" {
   # checkov:skip=CKV_GIT_1: I want the Repo to be public
-  name                                    = "HomeLab"
-  homepage_url                            = "https://www.arthurvardevanyan.com/homelab.html"
-  description                             = "HomeLab Server & Desktop Configuration"
-  visibility                              = "public"
-  has_issues                              = true
-  has_discussions                         = false
-  has_projects                            = false
-  has_wiki                                = false
-  is_template                             = false
-  allow_merge_commit                      = false
-  allow_squash_merge                      = true
-  allow_rebase_merge                      = false
-  allow_auto_merge                        = false
-  squash_merge_commit_title               = "PR_TITLE"
-  squash_merge_commit_message             = "BLANK"
-  merge_commit_title                      = "MERGE_MESSAGE"
-  merge_commit_message                    = "PR_TITLE"
-  delete_branch_on_merge                  = true
-  web_commit_signoff_required             = true
-  has_downloads                           = false
-  auto_init                               = true
-  license_template                        = "unlicense"
-  archived                                = false
-  archive_on_destroy                      = true
-  allow_update_branch                     = true
-  vulnerability_alerts                    = true
-  ignore_vulnerability_alerts_during_read = false
+  name                        = "HomeLab"
+  homepage_url                = "https://www.arthurvardevanyan.com/homelab.html"
+  description                 = "HomeLab Server & Desktop Configuration"
+  visibility                  = "public"
+  has_issues                  = true
+  has_discussions             = false
+  has_projects                = false
+  has_wiki                    = false
+  is_template                 = false
+  allow_merge_commit          = false
+  allow_squash_merge          = true
+  allow_rebase_merge          = false
+  allow_auto_merge            = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+  merge_commit_title          = "MERGE_MESSAGE"
+  merge_commit_message        = "PR_TITLE"
+  delete_branch_on_merge      = true
+  web_commit_signoff_required = true
+  auto_init                   = true
+  license_template            = "unlicense"
+  archived                    = false
+  archive_on_destroy          = true
+  allow_update_branch         = true
   topics = [
     "homelab",
     "kubernetes",
@@ -48,6 +45,11 @@ resource "github_repository" "HomeLab" {
 resource "github_repository_dependabot_security_updates" "HomeLab" {
   repository = github_repository.HomeLab.id
   enabled    = false
+}
+
+resource "github_repository_vulnerability_alerts" "HomeLab" {
+  repository = github_repository.HomeLab.name
+  enabled    = true
 }
 
 resource "github_branch" "homelab_main" {

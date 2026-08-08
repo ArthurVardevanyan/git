@@ -1,32 +1,29 @@
 resource "github_repository" "strava" {
   # checkov:skip=CKV_GIT_1: I want the Repo to be public
-  name                                    = "Strava"
-  homepage_url                            = ""
-  description                             = "Strava API Helper Commands"
-  visibility                              = "public"
-  has_issues                              = true
-  has_discussions                         = false
-  has_projects                            = false
-  has_wiki                                = false
-  is_template                             = false
-  allow_merge_commit                      = false
-  allow_squash_merge                      = false
-  allow_rebase_merge                      = true
-  allow_auto_merge                        = false
-  squash_merge_commit_title               = "PR_TITLE"
-  squash_merge_commit_message             = "BLANK"
-  merge_commit_title                      = "MERGE_MESSAGE"
-  merge_commit_message                    = "PR_TITLE"
-  delete_branch_on_merge                  = true
-  web_commit_signoff_required             = true
-  has_downloads                           = false
-  auto_init                               = true
-  license_template                        = "unlicense"
-  archived                                = true # false
-  archive_on_destroy                      = true
-  allow_update_branch                     = true
-  vulnerability_alerts                    = false # true
-  ignore_vulnerability_alerts_during_read = false
+  name                        = "Strava"
+  homepage_url                = ""
+  description                 = "Strava API Helper Commands"
+  visibility                  = "public"
+  has_issues                  = true
+  has_discussions             = false
+  has_projects                = false
+  has_wiki                    = false
+  is_template                 = false
+  allow_merge_commit          = false
+  allow_squash_merge          = false
+  allow_rebase_merge          = true
+  allow_auto_merge            = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+  merge_commit_title          = "MERGE_MESSAGE"
+  merge_commit_message        = "PR_TITLE"
+  delete_branch_on_merge      = true
+  web_commit_signoff_required = true
+  auto_init                   = true
+  license_template            = "unlicense"
+  archived                    = true # false
+  archive_on_destroy          = true
+  allow_update_branch         = true
   topics = [
     "strava",
   ]
@@ -46,6 +43,11 @@ resource "github_repository_dependabot_security_updates" "strava" {
   repository = github_repository.strava.id
   enabled    = false # true
 }
+
+# resource "github_repository_vulnerability_alerts" "strava" {
+#   repository = github_repository.strava.name
+#   enabled    = false # true
+# }
 
 resource "github_branch" "strava_main" {
   repository = github_repository.strava.name
