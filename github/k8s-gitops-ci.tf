@@ -76,9 +76,9 @@ resource "github_branch_protection" "k8s_gitops_ci_main" {
   require_signed_commits          = true
   required_linear_history         = true
   require_conversation_resolution = true
-  force_push_bypassers = [
-    "/ArthurVardevanyan"
-  ]
+  # force_push_bypassers = [
+  #   "/ArthurVardevanyan"
+  # ]
   allows_deletions    = false
   allows_force_pushes = false
   lock_branch         = false
